@@ -1,0 +1,160 @@
+{% extends '_base.html' %}
+{% load static %}
+{% load diary_archive %}
+
+{% block content %}
+
+
+<style type="text/css">
+    
+    a {
+        color: black;
+        text-decoration: none;
+    }
+        	
+    a:visited{
+        color: black;
+    }
+    
+    ul li{
+        list-style-type: none;
+    }
+    
+    .col_all_contents_wrapper{
+        background-color: #ffffff;
+    }
+/************新着日記エリア************/
+        	
+        	.diary_area{
+        		padding: 10px;
+        	}
+        	.each_diary_wrapper{
+        		padding: 10px 0px 20px 0px;
+        		border-bottom: solid 1px darkgray;
+        	}
+        	
+        	/* 基本的にはこいつのラッパーカラムにpaddingは入るからこいつにpaddingはいらない気がする */
+        	.each_diary{
+        		padding: 5px;
+        	}
+        	
+        	.each_diary#diary_info_area{
+        		background-color: #e6e6fa;
+        	}
+        	
+        	.each_diary#read_more{
+        		text-align: right;
+        	}
+        	
+        	.each_diary#diary_title{
+        		font-size: 130%;
+        		font-weight: bold;
+        	}
+        	
+        	span#diary_info{
+        		margin-right: 20px;
+        		font-size: 90%;
+        	}
+        	
+        	
+        	
+        	
+        	/*********************サイドバーエリア*********************/
+        	.sidebar_area{
+        		padding: 10px;
+        	}
+        	
+        	.side{
+        		margin-bottom: 100px;
+        	}
+    .list_area{
+        padding: 0px 60px 0px 0px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    
+    .pagenated_area{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 20px;
+    }
+</style>
+
+
+    <div class="col-md-10 offset-md-1 col_all_contents_wrapper">
+        <div class="row">				
+            <div class="col-md-8 area diary_area">
+                <div class="nav_bar">
+                    {% if diary_filter == "diary_top" %}
+    				    新着日記
+                    {% elif diary_filter == "category" %}
+                        『{{ object_list.0.category }}』の日記一覧
+                    {% elif diary_filter == "year" %}
+                        『{{ year.year }}年』の日記一覧
+                    {% elif diary_filter == "yearAndMonth" %}
+                        『{{ month | date:"Y年m月" }}』の日記一覧
+                    {% endif %}
+                </div>
+                
+                {% for each_diary in object_list %}
+    				<div class="each_diary_wrapper">
+				        <div class="each_diary" id="diary_title"><a href="{% url 'diary_contents' each_diary.pk %}">{{ each_diary.title }}</a></div>
+				            <div class="each_diary" id="diary_info_area">
+									<span id="diary_info">□投稿日時&nbsp;:&nbsp;{{ each_diary.created_at }}</span>
+                                    <span id="diary_info">□カテゴリ&nbsp;:&nbsp;{{ each_diary.category }}</span>
+				            </div>
+				            <div class="each_diary" id="">{{ each_diary.daiary_content|truncatechars:100 }}</div>
+                        <div class="each_diary" id="read_more"><a href="{% url 'diary_contents' each_diary.pk %}">続きを読む　＞</a></div>
+                    </div>
+                {% endfor %}
+                
+                <div class="pagenated_area">
+                    <ul class="pagination">
+                            <!-- 前へ の部分 -->
+                            {% if page_obj.has_previous %}
+                                <li class="page-item">
+                                    <a class="page-link" href="?page={{ page_obj.previous_page_number }}">
+                                        <span aria-hidden="true">&laquo;</span>
+                                    </a>
+                                </li>
+                            {% endif %}
+
+                            <!-- 数字の部分 -->
+                            {% for num in page_obj.paginator.page_range %}
+                                {% if page_obj.number == num %}
+                                    <li class="page-item active"><a class="page-link" href="#!">{{ num }}</a></li>
+                                {% else %}
+                                    <li class="page-item"><a class="page-link" href="?page={{ num }}">{{ num }}</a></li>
+                                {% endif %}
+                            {% endfor %}
+
+                            <!-- 次へ の部分 -->
+                            {% if page_obj.has_next %}
+                                <li class="page-item">
+                                    <a class="page-link" href="?page={{ page_obj.next_page_number }}">
+                                        <span aria-hidden="true">&raquo;</span>
+                                    </a>
+                                </li>
+                            {% endif %}
+                    </ul>
+                </div>
+                
+            </div>
+    		
+                    
+                    
+            <div class="col-1 span_area"></div>
+    					
+    					
+    					
+            <div class="col-md-3 area sidebar_area">		
+                {% render_diary_links %}
+            </div>
+            
+            
+        </div>
+    </div>
+
+{% endblock content %}

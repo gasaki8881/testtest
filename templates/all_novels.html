@@ -1,0 +1,148 @@
+{% extends '_base.html' %}
+{% load static %}
+
+{% block content %}
+    <style>
+        a {
+            color: #00b379;
+            text-decoration: none,
+        }
+        	
+        	a:visited{
+        		color: #00b379;
+        	}
+        	
+        	.col_all_novels{
+        		border: solid 1px;
+        		padding: 20px 10px 20px 10px; 
+        	}
+        	
+        	.row_each_novel_wrapper{
+        		border-radius: 10px;
+        		background-color: #ffffff;
+        		margin: 30px 0px 30px 0px;
+        		padding: 10px 0px 10px 0px; 
+        		box-shadow: 0 10px 8px -6px rgba(0,0,0,.3);
+        		z-index: 999;
+        	}
+        	
+        	
+        	.novel_title{
+        		font-weight: bold;
+        		font-size: 130%;
+        		padding: 10px;
+        		display: flex;
+				justify-content: center;
+				align-items: center;
+        	}
+        	
+        	.novel_comment{
+        		font-size: 90%;
+        		line-height: 1.7;
+        		padding: 10px;
+        		display: flex;
+				justify-content: center;
+				align-items: center;
+        	}
+        	
+        	
+        	.slash_area{
+        		border-top: 1px solid darkgray;
+        	}
+        	
+        	.novel_information_area{
+        		font-size: 80%;
+        	}
+        	
+        	.information{
+        		padding-top: 5px; 
+        	}
+        	
+        	.novel_summary{
+        	}
+        
+        .novel_status_box{
+            font-weight: bold;
+            color: #ffffff;
+            padding: 3px 5px 3px 5px;
+            text-align: center;
+            border-radius: 5px;
+            display: inline-block;
+        }
+        .novel_status_box#completion{
+            background-color:blueviolet;    
+        }
+        .novel_status_box#serialized{
+            background-color:crimson;    
+        }
+        .novel_status_box#short{
+            background-color:firebrick;    
+        }
+        .novel_status_box#long{
+            background-color:coral;  
+        }
+        .read_novel{
+            font-size: 100%;
+            color: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        a#read_novel_btn{
+            color: #ffffff;
+            padding: 5px;
+            text-align: center;
+            width: 50%;
+            border-radius: 5px;
+            background-color: #00b379;
+        }
+        	
+        </style>
+    
+
+            <div class="col-md-10 offset-md-1">
+                
+                {% for novel in object_list %}
+                <div class="row row_each_novel_wrapper">
+    					<div class="col-md-6 novel_title_area">
+    						<div class="novel_title">
+    							<a href="{% url 'all_chapters' novel.pk %}">{{ novel.title }}</a>
+    						</div>
+    						<div class="novel_comment">
+    							『{{ novel.novel_comment }}』
+    						</div>
+    						<div class="slash_area d-md-none"></div>
+    					</div>
+    					
+    					<div class="col-md-6 novel_information_area">
+    						<div class="information novel_summary">
+    							{{ novel.novel_summary|truncatechars:50 }}
+    						</div>
+    						<div class="information novel_information">
+    							□{{ novel.total_chapter }}章&nbsp;&nbsp;&nbsp;□ページ数: {{ novel.total_page }}&nbsp;&nbsp;&nbsp;<br class="d-block d-sm-none" />□最終更新日: {{ novel.updated_at }}&nbsp;&nbsp;&nbsp;
+    						</div>
+    						<div class="information novel_status">
+                                {% if novel.novel_status == "完結" %}
+    				                <div class="novel_status_box" id="completion">{{ novel.novel_status }}</div>
+                                {% else %}
+                                    <div class="novel_status_box" id="serialized">{{ novel.novel_status }}</div>
+                                {% endif %}
+                                
+                                {% if novel.novel_category == "短編" %}
+    				                <div class="novel_status_box" id="short">{{ novel.novel_category }}</div>
+                                {% else %}
+                                    <div class="novel_status_box" id="long">{{ novel.novel_category }}</div>
+                                {% endif %}
+    						</div>
+    						<div class="information read_novel">
+                                <a href="{% url 'all_chapters' novel.pk %}" id="read_novel_btn">
+                                    読む
+                                </a>
+    						</div>
+    					</div>
+    					
+                </div>
+                {% endfor %}
+            </div>
+                
+{% endblock content %}

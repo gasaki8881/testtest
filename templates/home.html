@@ -1,0 +1,355 @@
+{% extends '_base.html' %}
+{% load static %}
+
+{% block content %}
+
+<style>
+    
+    a {
+        color: black;
+        text-decoration: none,
+    }
+
+    a:visited{
+        color: black;
+    }
+    
+    
+    .area{
+        margin-top: 30px;
+        padding: 10px; 
+        background-color: #ffffff;
+    }
+    
+    .col_contents_area{
+        
+    }
+    
+    .top_image{
+        background-color: #ffffff;
+        padding: 10px;
+    }
+    
+    
+    /*********************日記エリア*********************/
+        	.diary_area{
+        		padding: 10px;
+        	}
+        	.each_diary_wrapper{
+        		padding: 10px 0px 20px 0px;
+        		border-bottom: solid 1px darkgray;
+        	}
+        	
+        	/* 基本的にはこいつのラッパーカラムにpaddingは入るからこいつにpaddingはいらない気がする */
+        	.each_diary{
+        		padding: 5px;
+        	}
+        	
+        	.each_diary#diary_info_area{
+        		background-color: #e6e6fa;
+        	}
+        	
+        	.each_diary#read_more{
+        		text-align: right;
+        	}
+        	
+        	.each_diary#diary_title{
+        		font-size: 130%;
+        		font-weight: bold;
+        	}
+        	
+        	span#diary_info{
+        		margin-right: 20px;
+        		font-size: 90%;
+        	}
+        	
+        	
+        	
+        	
+        	
+        	
+        	/*********************サイドバーエリア*********************/
+        	.sidebar_area{
+        		padding: 10px;
+        	}
+        	
+        	.side{
+        		margin-bottom: 80px;
+        	}
+        	
+        	.about_author{
+        	}
+        	
+        	.author_image{
+        		margin: auto;
+        		width: 200px;
+        		height: 150px;
+        	}
+        	
+        	.self_introduce{
+        		border-top: 1px solid darkgray;
+        		margin-top: 10px;
+        	}
+        	
+        	.about{
+        		padding: 10px 5px 10px 5px;
+        		border-bottom: solid 1px darkgray;
+        		font-size: 90%;
+        	}
+        	
+        	.nav_bar#twitter{
+        		background-color: #00ACEE;
+        	}
+        	
+        	
+        	
+        	
+        	
+        	
+        	/*********************アクセスの多いテキストエリア*********************/
+        	.recommend_novel_area{
+        		background-image: url("{% static 'images/cork.jpg' %}");
+				padding: 10px;
+    			border: inset 10px #fce2c4;
+    			box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.5);
+    			z-index: 999;
+        	}
+        	
+        	.recommend_novel_bar{
+        		font-family: 'serif';
+    			text-align: center;
+    			font-size: 120%;
+    			font-family: 'serif';
+    			font-weight: bold;
+    			text-align: center;
+    			padding-top: 10px;
+    			display: flex;
+				justify-content: center;
+				align-items: center;
+    		}
+    		
+    		.col_recommend_novel{
+    			padding: 10px;
+    			display: flex;
+				justify-content: center;
+				align-items: center;
+    		}
+    		
+    		
+    		.pin {
+    			margin: auto;
+				height: 20px;
+				width: 20px;
+				border-radius: 10px;
+				box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+    			
+			}
+			.pin#recommend_novel{
+				background-image: -moz-radial-gradient(45px 45px 45deg, circle cover, #8B0000 50%, black 100%);
+    			background-image: -webkit-radial-gradient(45px 45px, circle cover, #8B0000, black);
+    			background-image: radial-gradient(#8B0000 50%, black 100%);
+			}
+			.pin#left{
+				background-image: -moz-radial-gradient(45px 45px 45deg, circle cover, yellow 50%, black 100%);
+    			background-image: -webkit-radial-gradient(45px 45px, circle cover, yellow, black);
+    			background-image: radial-gradient(yellow 50%, black 100%);
+			}
+			.pin#right{
+				background-image: -moz-radial-gradient(45px 45px 45deg, circle cover, red 50%, black 100%);
+    			background-image: -webkit-radial-gradient(45px 45px, circle cover, red, black);
+    			background-image: radial-gradient(red 50%, black 100%);
+			}
+			
+        	.note {
+        		width: 300px;
+        		min-height: 230px;
+        		padding: 10px;
+    			box-shadow: 0 3px 6px rgba(0,0,0,.25);
+    			-webkit-box-shadow: 0 3px 6px rgba(0,0,0,.25);
+    			-moz-box-shadow: 0 3px 6px rgba(0,0,0,.25);
+    			float: left;
+    			border: 1px solid rgba(0,0,0,.25);
+    			position: relative;
+			}
+			
+			.sticky#bar{
+				min-height: 100px;
+				background-color:  #ffffff;
+                transform: rotate(-3.5deg);
+                -webkit-transform: rotate(-3.5deg);
+                -moz-transform: rotate(-3.5deg);
+			}
+			.sticky#left{
+				background-color: #CBFAFA;
+			}
+			.sticky#right{
+				background-color:  #FFBBFF;
+			}
+			
+			.recommend_novel_bar#left {
+        		min-height: 80px;
+        		border-bottom: solid 10px #FFFF66;
+        	}
+        	.recommend_novel_bar#right {
+        		min-height: 80px;
+        		border-bottom: solid 10px #DC143C;
+        	}
+            .recommend_novel_bar#recommend {
+        		
+        	}
+        	
+        	.recommend_novel_infomation{
+        		font-size: 90%;
+        		text-align: center;
+        	}
+        	.recommend_novel_infomation#comment{
+        		padding: 10px 0px 10px 0px;
+        	}
+        	
+        	a:hover.note {
+    			border: 1px solid rgba(0,0,0,.75);
+    			-webkit-transform: scale(1.1);
+    			-moz-transform: scale(1.1);
+    			transform: scale(1.1);
+			}
+    
+            .about{
+        		padding: 10px 5px 10px 5px;
+        		border-bottom: solid 1px darkgray;
+        		font-size: 90%;
+        	}
+    
+    
+    
+</style>
+    
+            <div class="col-md-10 offset-md-1 col_contents_area">
+                <div class="row">
+                    <div class="col-12 top_image">
+                        <img src="{% static 'images/top.png' %}" class="img-fluid">
+                    </div>
+                
+                        
+                                <div class="col-sm-10 offset-sm-1 area recommend_novel_area">
+                                    <div class="row">
+                                        <div class="col-12 col_recommend_novel">
+                                            <div class="note sticky" id="bar">
+                                                <div class="pin" id="recommend_novel"></div>
+                                                <div class="recommend_novel_bar" id="recommend">
+                                                    アクセスの多い小説
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-6 col_recommend_novel">
+                                            <a href="{% url 'all_chapters' recommend_novel1.pk %}" class="note sticky" id="left">
+                                                <div class="pin" id="left"></div>
+                                                <div class="recommend_novel_bar" id="left">{{ recommend_novel1.title }}</div>
+                                                <div class="recommend_novel_infomation" id="comment">『{{ recommend_novel1.novel_comment }}』</div>
+                                                <div class="recommend_novel_infomation">
+                                                    □{{ recommend_novel1.novel_status }}　
+                                                    □{{ recommend_novel1.total_chapter }}章
+                                                </div>
+                                                <div class="recommend_novel_infomation">□最終更新日：{{ recommend_novel1.updated_at }}</div>
+                                            </a>
+                                        </div>
+                                        <div class="col-md-6 col_recommend_novel">
+                                            <a href="{% url 'all_chapters' recommend_novel2.pk %}" class="note sticky" id ="right">
+                                                <div class="pin" id="right"></div>
+                                                <div class="recommend_novel_bar" id="right">{{ recommend_novel2.title }}</div>
+                                                <div class="recommend_novel_infomation" id="comment">『{{ recommend_novel2.novel_comment }}』</div>
+                                                <div class="recommend_novel_infomation">
+                                                    □{{ recommend_novel2.novel_status }}　
+                                                    □{{ recommend_novel2.total_chapter }}章
+                                                </div>
+                                                <div class="recommend_novel_infomation">□最終更新日：{{ recommend_novel2.updated_at }}</div>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+				            
+    					
+    					
+    					
+    					<div class="col-md-8 area diary_area">
+    						<div class="nav_bar">
+    							新着日記
+    						</div>
+    						
+    						
+    						{% for each_diary in object_list %}
+                                <div class="each_diary_wrapper">
+                                    <div class="each_diary" id="diary_title"><a href="{% url 'diary_contents' each_diary.pk %}">{{ each_diary.title }}</a></div>
+                                        <div class="each_diary" id="diary_info_area">
+                                                <span id="diary_info">□投稿日時&nbsp;:&nbsp;{{ each_diary.created_at }}</span>
+                                                <span id="diary_info">□カテゴリ&nbsp;:&nbsp;{{ each_diary.category }}</span>
+                                        </div>
+                                        <div class="each_diary" id="">{{ each_diary.daiary_content|truncatechars:100 }}</div>
+                                    <div class="each_diary" id="read_more"><a href="{% url 'diary_contents' each_diary.pk %}">続きを読む　＞</a></div>
+                                </div>
+                            {% endfor %}
+        					
+    					</div>
+    					
+    					
+    					<div class="col-1 span_area">
+    					</div>
+    					
+    					
+    					
+    					<div class="col-md-3 area sidebar_area">
+    						
+    						<div class="side about_author">
+    							<div class="nav_bar">
+    								管理人
+    							</div>
+    							
+    							<div class="author_image">
+    								<img src="{% static 'images/author.png' %}" class="img-fluid rounded-circle">
+    							</div>
+    							
+    							<div class="about self_introduce">
+    								神奈川県在住の若輩者です。
+                                    好きな上忍はガイ先生です。
+    							</div>
+                                <div class="about about_contact">
+    								■mail<br/>
+    				                gasaki8881@gmail.com<br/>
+    								■twitter<br/>
+    								<a href="https://twitter.com/gasaki18">https://twitter.com/gasaki18</a><br/>
+    								■github<br/>
+    								<a href="https://github.com/gasaki8881">https://github.com/gasaki8881</a>
+    							</div>
+    						</div>
+    						
+    						
+    						
+    						<div class="side about_this_site">
+    							<div class="nav_bar">
+    								このサイトについて
+    							</div>
+    							<div class="about about_copyright">
+    								①著作権<br/>
+    								&nbsp;&nbsp;&nbsp;フリーです。引用等、ご自由にどうぞ。引用の際等、管理人へのご連絡も不要です。
+    							</div>
+    							<div class="about about_pages">
+    								②ページ数定義<br/>
+    								&nbsp;&nbsp;&nbsp;38文字×16行で1ページとして計算しています。
+    							</div>
+    						</div>
+    						
+    						<div class="side twitter_area">
+    							<div class="nav_bar" id="twitter">
+    								ツイッター
+    							</div>
+    							<div class="twitter_timeline">
+    								<a class="twitter-timeline" data-theme="light" data-link-color="#2B7BB9" href="https://twitter.com/gasaki18?ref_src=twsrc%5Etfw">Tweets by gasaki18</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script> 
+    							</div>
+    						</div>
+    					</div>		
+    				</div>
+                </div>
+            
+        
+
+{% endblock content %}

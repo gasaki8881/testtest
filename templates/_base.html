@@ -1,0 +1,182 @@
+<!doctype html>
+
+<html lang="ja">
+
+<head>
+        <meta charset="utf-8">
+        <title>ノベルレディオ</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        
+        <style type="text/css">
+            
+            .nav_bar{
+        		font-size: 120%;
+        		font-weight: bold;
+        		text-align: center;
+        		background-color: #00b379;
+        		color: #ffffff;
+        		padding: 5px;
+        		margin: 20px 0px 20px 0px;
+        		box-shadow: 0px 6px 6px rgba(0, 0, 0, 0.5);
+        		z-index: 999;
+        	}
+            
+            a#header {
+                color: black;
+                text-decoration: none,
+            }
+
+            a#header:visited{
+                color: black;
+            }
+            
+            
+
+            .container-fluid{
+                background-color: #e6e6fa;
+            }
+            
+            .row_header_wrapper_area{
+                box-shadow: 0 10px 8px -6px rgba(0,0,0,.3);
+                z-index: 999;
+                position: relative;
+                background-color: #ffffff;
+            }
+            .header_logo_area{
+                background-color: #00b379;
+            }
+            .header_area{
+                padding: 15px 15px 0px 0px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+            ul li#header{
+                font-weight: bold;
+                font-size: 90%;
+                display: inline-block;
+                list-style-type: none;
+                padding: 0px 10px 0px 10px;
+            }
+            li#header + li#header{
+                border-left: 2px solid darkgray;
+            }
+            .header_icon_area{
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+            
+            /*こっからフッター*/
+        	
+        	a#footer {
+        		color: #ffffff;
+        		text-decoration: none,
+        	}
+        	
+        	a#footer:visited{
+        		color: #ffffff;
+        	}
+        	
+        	
+        	.col_footer_area{
+        		background-color: #00b379;
+        	}
+        	.footer_nav{
+        		min-height: 150px;
+        		padding: 15px 30px 0px 0px;
+        		display: flex;
+				justify-content: center;
+				align-items: center;
+        	}
+        	
+        	.footer_site_name{
+        		font-weight: bold;
+        		color: #ffffff;
+        		padding: 0px 0px 20px 0px;
+        		text-align: center;
+        	}
+        	
+        	ul li#footer{
+        		font-weight: bold;
+        		display: inline-block;
+				list-style-type: none;
+				padding: 0px 10px 0px 10px;
+        	}
+        	
+        	li#footer + li#footer{
+        		border-left: 2px solid #ffffff;
+        	}
+            
+		</style>
+
+</head>
+
+<body>
+    
+    {% load static %}
+    
+    <div class="container-fluid"><!container start>        
+        <div class="row"><!row start>
+            <div class="col-md-10 offset-md-1">
+                <div class="row row_header_wrapper_area">
+                    <div class="col-12 col-md-3 header_logo_area">
+                        <div class="logo_size">
+                            <a href="{% url 'home' %}"><img src="{% static 'images/logo.png' %}" class="img-fluid"></a>
+                        </div>
+                    </div>
+                    <div class="col-10 col-md-8 header_area">
+                        <ul>
+                            <li id="header"><a href="{% url 'home' %}" id="header">トップページ</a></li>
+                            <li id="header"><a href="{% url 'all_novels' %}" id="header">小説一覧</a></li>
+                            <li id="header"><a href="{% url 'diary_top' %}" id="header">日記</a></li>
+                            <li id="header"><a href="{% url 'contact' %}" id="header">問い合わせ</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-2 col-md-1 header_icon_area">
+                        <img src="{% static 'images/shiori.png' %}" class="img-fluid">
+                    </div>
+                </div>
+            </div>
+            
+            {% block content %}
+            {% endblock content %}
+            
+            <div class="col-12 col_footer_area">
+				<div class="footer_nav">
+					<ul>
+						<li id="footer"><a href="{% url 'home' %}" id="footer">トップページ</a></li>
+						<li id="footer"><a href="{% url 'all_novels' %}" id="footer">小説一覧</a></li>
+						<li id="footer"><a href="{% url 'diary_top' %}" id="footer">日記</a></li>
+						<li id="footer"><a href="{% url 'contact' %}" id="footer">問い合わせ</a></li>
+					</ul>
+				</div>
+				
+				<div class="footer_site_name">
+					2020 茅ヶ崎ユキコのノベルレディオ
+				</div>
+			</div>
+            
+            
+        </div>
+    </div>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</body>
+    
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>           
+
+</html>

@@ -1,0 +1,156 @@
+{% extends '_base.html' %}
+
+{% block content %}
+
+
+<style type="text/css">
+    .sticky-top#novel_header{
+        text-align: right;
+        background-color:#ffffff;
+        padding-right: 10px;
+        border-bottom: solid 1px black;/*線*/
+    }
+    
+    a　{
+        color:floralwhite;
+        text-decoration: none,
+    }
+
+    a:visited{
+        color:floralwhite;
+    }
+    
+    .container-fluid{
+        background-color:#e6e6fa;
+    }
+    .contents_area{
+        background-color: #ffffff;
+    }
+    .novel_title{
+        font-size: 170%;
+        font-weight: bold;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 30px;
+    }
+    .chapter_title{
+        font-size: 130%;
+        font-weight: bold;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 40px 0px 40px 0px;
+    }
+    
+    .chapter_contents{
+        line-height: 2;
+        margin-bottom: 0px;
+        padding: 0px 10px 30px 10px;
+    }
+    
+    .innner_navigate_bar{
+        font-size: 80%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        background-color: darkgray;
+        height: 50px;
+        
+    }
+    .innner_navigate_bar#center{
+        border-left: solid 1px #ffffff;
+        border-right: solid 1px #ffffff;
+    }
+    
+    span#neighbor{
+        line-height: 2;
+        padding: 0.2em 0;
+        background-repeat: repeat-x;
+        background-size: 1em 0.2em;
+        background-position: top left;
+        background-image: -webkit-gradient(radial,center center,0,center center,1.5,from(#000000),color-stop(0.5,#000000),color-stop(0.9,transparent),to(transparent));
+        background-image: -webkit-radial-gradient(center center, 0.1em 0.1em, #000000, #000000 95%, transparent 95%, transparent);
+        background-image: radial-gradient(0.1em 0.1em at center center, #000000, #000000 95%, transparent);
+    }
+    
+    .novel_footer {
+        height: 100px;
+    }
+    
+    
+    
+</style>
+            
+            <div class="col-md-10 offset-md-1 contents_area">
+                <div class="row">
+                    <div class="col-12 novel_title">
+                        {{ target_chapter.title }}
+                    </div>
+                    <div class="col-4 innner_navigate_bar">
+                        {% if before_chapter == None %}
+                        {% else %}
+                            <a href="{% url 'chapter_contents' before_chapter.pk %}">＜　前へ</a>
+                        {% endif %}
+                    </div>
+                    <div class="col-4 innner_navigate_bar" id="center">
+                        <a href="{% url 'all_chapters' target_novel.pk %}">章一覧へ戻る</a>
+                    </div>
+                    <div class="col-4 innner_navigate_bar">
+                        {% if next_chapter == None%}
+                        {% else %}
+                            <a href="{% url 'chapter_contents' next_chapter.pk %}">次へ　＞</a>
+                        {% endif %}
+                    </div>
+                            
+                    <div class="col-12 chapter_title">
+                        第{{ target_chapter.chapter_id }}章　{{ target_chapter.chapter_title }}
+                    </div>
+                    
+                    <div class="col-md-8 offset-md-2">
+                        <div class="row">
+                            <div class="col-12 chapter_contents" id="test">
+                                &nbsp;&nbsp;&nbsp;&nbsp;{{ target_chapter.chapter_content | linebreaksbr }}
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-4 innner_navigate_bar">
+                        {% if before_chapter == None%}
+                        {% else %}
+                            <a href="{% url 'chapter_contents' before_chapter.pk %}">＜　前へ</a>
+                        {% endif %}
+                    </div>
+                    <div class="col-4 innner_navigate_bar" id="center">
+                        <a href="{% url 'all_chapters' target_novel.pk %}">章一覧へ戻る</a>
+                    </div>
+                    <div class="col-4 innner_navigate_bar">
+                        {% if next_chapter == None%}
+                        {% else %}
+                            <a href="{% url 'chapter_contents' next_chapter.pk %}">次へ　＞</a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+    
+            
+    
+        <script>        	
+	        window.onload = function(){
+	  			console.log("called"); 
+                $('#test').html(
+                    $('#test').html()
+                        .replace(/■■■/g, '</span>')
+	            		.replace(/■■/g, '<span id="neighbor">')
+                        .replace(/★★★/g, '</rt></ruby>')
+	            		.replace(/★★/g, '</rb><rt>')
+	            		.replace(/##/g, '<ruby><rb>')
+                );
+			};
+        </script>
+
+
+		
+
+{% endblock content %}

@@ -1,0 +1,129 @@
+{% extends '_base.html' %}
+{% load static %}
+{% load diary_archive %}
+
+{% block content %}
+
+        
+        <style type="text/css">
+        	
+        	
+        	a {
+        		color: black;
+        		text-decoration: none;
+        	}
+        	
+        	a:visited{
+        		color: black;
+        	}
+            
+            ul li{
+                list-style-type: none;
+            }
+        	
+        	.area{
+        		margin-top: 30px;
+        	}
+        	
+        	
+            .col_all_contents_wrapper{
+                background-color: #ffffff;    
+            }
+        	
+        	/************日記コンテンツエリア************/
+        	
+        	.diary_area{
+        		padding: 10px;
+        	}
+        	.each_diary_wrapper{
+        		padding: 10px 0px 20px 0px;
+        		border-bottom: solid 1px darkgray;
+        	}
+        	
+        	/* 基本的にはこいつのラッパーカラムにpaddingは入るからこいつにpaddingはいらない気がする */
+        	.each_diary{
+        		padding: 5px;
+        	}
+        	
+        	.each_diary#diary_info_area{
+        		background-color: #e6e6fa;
+        	}
+        	
+        	
+        	
+        	.each_diary#diary_title{
+        		font-size: 130%;
+        		font-weight: bold;
+        	}
+        	
+        	span#diary_info{
+        		margin-right: 20px;
+        		font-size: 90%;
+        	}
+        	
+        	.each_diary#contents{
+        		line-height: 1.7;
+        		padding: 20px 0px 20px 0px;
+        	}
+        	
+        	
+        	
+        	
+        	/*********************サイドバーエリア*********************/
+        	.sidebar_area{
+        		padding: 10px;
+        	}
+        	
+        	.side{
+        		margin-bottom: 100px;
+        	}
+            .list_area{
+                padding: 0px 60px 0px 0px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+            
+            .return{
+                padding: 20px;
+                text-align: center;
+            }
+        </style>           
+    
+    
+    
+    
+    			<div class="col-md-10 offset-md-1 col_all_contents_wrapper">
+    				<div class="row">
+    					<div class="col-md-8 area diary_area">
+    						
+    						<div class="each_diary_wrapper">
+								<div class="each_diary" id="diary_title">{{ diary_contents.title }}</div>
+								<div class="each_diary" id="diary_info_area">
+									<span id="diary_info">□投稿日時:{{ diary_contents.created_at }}</span>
+									<span id="diary_info">□カテゴリ:{{ diary_contents.category }}</span>
+								</div>
+								<div class="each_diary" id="contents">
+									{{ diary_contents.daiary_content | linebreaksbr }}
+								</div>
+        					</div>
+                            
+                            <div class="return">
+                                <a href="{% get_return_link request %}">＜　日記一覧に戻る</a>
+                            </div>
+                            
+    					</div>
+    					
+    					
+    					<div class="col-1 span_area">
+    					</div>
+    					
+    					
+    					
+    					<div class="col-md-3 area sidebar_area">
+    						{% render_diary_links %}
+    					</div>	
+    				</div>
+    			</div>
+
+{% endblock content %}

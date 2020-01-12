@@ -1,0 +1,34 @@
+		
+                <div class="side link_by_category">
+                    <div class="nav_bar">
+                        カテゴリ
+                    </div>
+                    <div class="list_area">
+                        <ul>
+                        {% for category in category_list %}
+                            <li><a href="{% url 'diary_by_categry' category.pk %}">{{ category }}({{ category.post_count }})</a></li>
+                            {% endfor %}    
+                        </ul>
+                    </div>
+                </div>
+    									
+                <div class="side link_by_archive">
+    				<div class="nav_bar">
+                        アーカイブ
+                    </div>
+    				
+                    <div class="list_area">
+                        {% regroup dates by year as dates_by_year %}
+						<ul>
+						    {% for month in dates_by_year %}
+						        <li><a href="{% url 'diary_archive' month.grouper %}">{{ month.grouper }}年</a>
+						            <ul>
+						                {% for d in month.list %}
+						                    <li><a href="{% url 'diary_archive' month.grouper d.month %}">{{ d|date:'F' }}</a></li>
+						                {% endfor %}
+						            </ul>
+						        </li>
+						    {% endfor %}
+						</ul>
+                    </div>
+                </div>

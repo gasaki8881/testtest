@@ -1,0 +1,35 @@
+{% extends '_base.html' %}
+{% load static %}
+{% load diary_archive %}
+
+{% block content %}
+
+
+<style type="text/css">
+    
+    .col_all_contents_wrapper{
+        background-color: #ffffff;
+        text-align: center;
+        padding: 20px;
+        min-height: 500px;
+    }
+
+</style>
+
+
+    <div class="col-md-10 offset-md-1 col_all_contents_wrapper">
+        {% if contact_result == "" %}
+            <h2>お問い合わせ</h2>
+            <p>お手数ですが下記項目をご入力いただき、ページ下部の『送信』ボタンをクリック願います。</p>
+            <form method="POST">{% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit" class="btn btn-primary">送信</button>
+            </form>
+        {% else %}
+            <h2>お問い合わせが完了しました。</h2>
+            <p>お問い合わせありがとうございます。後ほど管理人のほうからコンタクトを取らせて頂きますので、今しばらくお待ちください。</p>
+        {% endif %}
+    
+    </div>
+
+{% endblock content %}

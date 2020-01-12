@@ -1,0 +1,93 @@
+{% extends '_base.html' %}
+
+{% block content %}
+
+    <style>
+        	a {
+        		color: #00b379;
+        		text-decoration: none,
+        	}
+        	
+        	a:visited{
+        		color: #00b379;
+        	}
+        	
+        	.col_all_chapters{
+                min-height: 500px;
+        		padding: 20px 10px 20px 10px;
+                background-color: #ffffff;
+        	}
+        	
+        	.novel_title{
+        		font-weight: bold;
+        		font-size: 170%;
+        		padding: 20px 5px 20px 5px;
+        		display: flex;
+				justify-content: center;
+				align-items: center;
+        	}
+        	
+        	.novel_comment{
+        		padding: 20px 5px 40px 5px;
+        		display: flex;
+				justify-content: center;
+				align-items: center;
+        	}
+        	
+        	.novel_summary{
+        		padding: 20px 5px 20px 5px;
+        		border-top: 1px solid darkgray;
+        		border-bottom: 1px solid darkgray;
+        	}
+        	
+        	.each_chapter_wrapper{
+				border-left: 8px solid #00b379;
+				padding: 5px;
+				margin-top: 10px;
+        	}
+        	
+        	.chapter_title{
+        		font-weight: bold;
+        		font-size: 0.9em;
+        	}
+        	
+        	.chapter_information{
+        		text-align: right;
+        		font-size: 0.8em;
+        	}
+        	
+            .contents_area{
+                background-color: #ffffff;
+            }
+        </style>           
+    
+
+
+    
+    
+    <div class="col-md-10 offset-md-1 contents_area">
+        <div class="row">
+            <div class="col-md-10 offset-md-1 col_all_chapters">
+    				<div class="novel_title">
+    					{{ target_novel.title }}
+    				</div>
+    				<div class="novel_comment">
+    					『{{ target_novel.novel_comment }}』
+    				</div>
+    				
+    				<div class="novel_summary">
+    					{{ target_novel.novel_summary }}
+    				</div>
+    			     
+                    {% for chapter in object_list %}
+    				<div class="each_chapter_wrapper">
+    					<div class="chapter_title"><a href="{% url 'chapter_contents' chapter.pk %}">{{ chapter.chapter_id }}章&nbsp;&nbsp;{{ chapter.chapter_title }}</a></div>
+    					<div class="chapter_information">ページ数: {{ chapter.page_count }}&nbsp;&nbsp;&nbsp;<br class="d-block d-sm-none" />最終更新日: {{ chapter.updated_at }}&nbsp;&nbsp;&nbsp;</div>
+    				</div>
+                    {% endfor %}
+            </div>
+        </div>
+    </div>
+        
+
+{% endblock content %}
