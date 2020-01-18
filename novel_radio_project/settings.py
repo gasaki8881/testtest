@@ -1,5 +1,4 @@
 
-#lolipop!
 
 import os
 
