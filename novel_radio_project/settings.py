@@ -1,5 +1,5 @@
 
-#git add -u!
+#umumu!
 
 import os
 
