@@ -1,5 +1,5 @@
 
-from .secret_variables import *
+import os
 
 try: 
 	from .secret_variable import *
