@@ -4,7 +4,7 @@
 import os
 
 try: 
-	from .secret_variable import *
+	from .secret_variables import *
 except ModuleNotFoundError:
 	email_host_user = os.environ['email_host_user']
 	email_host_password = os.environ['email_host_password']
